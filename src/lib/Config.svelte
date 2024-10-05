@@ -2,7 +2,6 @@
     import { ipfsGateway, galleries } from "./stores";
     import { writable } from "svelte/store";
 
-    // Local writable stores for input and status messages
     const galleryCID = writable("");
     const fetchStatus = writable("");
     const isFetching = writable(false);
@@ -26,37 +25,43 @@
             const metadataUrl = `${gateway}/ipfs/${cid}/metadata.json`;
             const response = await fetch(metadataUrl);
 
-            if (!response.ok) {
+            if (!response.ok)
                 throw new Error(
                     `Failed to fetch metadata. Status: ${response.status}`,
                 );
-            }
 
             const metadata = await response.json();
 
-            if (!metadata.name || !metadata.images) {
+            if (!metadata.name || !metadata.images)
                 throw new Error("Invalid metadata structure.");
-            }
 
             galleries.update((galleriesList) => [
                 ...galleriesList,
                 { cid, metadata },
             ]);
-
             fetchStatus.set("Gallery registered successfully!");
         } catch (error) {
-            if (error instanceof Error)
-                fetchStatus.set(`Error: ${error.message}`);
-            else throw error;
+            fetchStatus.set(
+                `Error: ${error instanceof Error ? error.message : error}`,
+            );
         } finally {
             isFetching.set(false);
         }
     }
 
     function handleGatewayChange(event: Event) {
-        // Use a type assertion to access the value of the input field
         const input = event.target as HTMLInputElement;
         ipfsGateway.set(input.value);
+    }
+
+    function removeGallery(cid: string) {
+        galleries.update((galleriesList) =>
+            galleriesList.filter((gallery) => gallery.cid !== cid),
+        );
+    }
+
+    function formatCID(cid: string): string {
+        return `${cid.slice(0, 6)}...${cid.slice(-6)}`;
     }
 </script>
 
@@ -69,7 +74,6 @@
         Settings
     </h2>
 
-    <!-- IPFS Gateway Configuration -->
     <div
         class="max-w-lg mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-8"
     >
@@ -91,7 +95,6 @@
             placeholder="https://ipfs.io"
         />
 
-        <!-- Display the current IPFS Gateway -->
         <div class="text-sm text-gray-600 dark:text-gray-400">
             Current IPFS Gateway:
             <span class="font-semibold text-gray-900 dark:text-gray-200"
@@ -100,7 +103,6 @@
         </div>
     </div>
 
-    <!-- Register New Gallery Section -->
     <div
         class="max-w-lg mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
     >
@@ -130,7 +132,6 @@
             {$isFetching ? "Registering..." : "Register Gallery"}
         </button>
 
-        <!-- Fetch Status Message -->
         {#if $fetchStatus}
             <p
                 class="mt-4 text-center text-sm text-gray-800 dark:text-gray-100"
@@ -140,7 +141,6 @@
         {/if}
     </div>
 
-    <!-- Display Registered Galleries -->
     <div
         class="max-w-lg mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mt-8"
     >
@@ -149,15 +149,38 @@
         </h3>
 
         {#if $galleries.length > 0}
-            <ul class="list-disc pl-5">
+            <ul class="list-none pl-0">
                 {#each $galleries as gallery}
-                    <li class="text-gray-700 dark:text-gray-300 mb-2">
-                        <span
-                            class="font-semibold text-gray-900 dark:text-gray-200"
+                    <li
+                        class="flex items-center justify-between text-gray-700 dark:text-gray-300 mb-4"
+                    >
+                        <!-- Gallery Info -->
+                        <div class="flex-grow">
+                            <div
+                                class="font-semibold text-gray-900 dark:text-gray-200 truncate max-w-xs"
+                            >
+                                {gallery.metadata.author
+                                    ? gallery.metadata.author
+                                    : "Unknown"} - {gallery.metadata.name}
+                            </div>
+                            <a
+                                href={`${$ipfsGateway}/ipfs/${gallery.cid}`}
+                                target="_blank"
+                                class="text-sm text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 truncate block"
+                                title="View on IPFS Gateway"
+                            >
+                                {formatCID(gallery.cid)}
+                            </a>
+                        </div>
+
+                        <!-- "x" Button on the right side with square style -->
+                        <button
+                            class="ml-4 w-8 h-8 flex items-center justify-center rounded bg-red-500 dark:bg-red-400 text-white dark:text-black hover:bg-red-600 dark:hover:bg-red-500 transition duration-200"
+                            on:click={() => removeGallery(gallery.cid)}
+                            title="Remove Gallery"
                         >
-                            {gallery.metadata.name}
-                        </span>
-                        - {gallery.cid}
+                            x
+                        </button>
                     </li>
                 {/each}
             </ul>
