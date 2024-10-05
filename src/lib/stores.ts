@@ -13,3 +13,7 @@ export const currentPage = writable<Page>("Galleries");
 function setActivePage(page: Page) {
     currentPage.set(page);
 }
+
+
+export const ipfsGateway = writable(localStorage.getItem("ipfsGateway") || "https://ipfs.io");
+theme.subscribe((value) => localStorage.setItem("ipfsGateway", value));
