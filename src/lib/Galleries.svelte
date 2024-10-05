@@ -1,5 +1,9 @@
 <script lang="ts">
     import { galleries, ipfsGateway } from "./stores";
+
+    function ipfsLinks(cid: string, file: string): string {
+        return `${$ipfsGateway}/ipfs/${cid}/${file}`;
+    }
 </script>
 
 <!-- Gallery Section -->
@@ -26,16 +30,19 @@
                 >
                     <!-- Gallery Cover Image -->
                     <img
-                        src={gallery.cover}
-                        alt={gallery.name}
+                        src={ipfsLinks(
+                            gallery.cid,
+                            gallery.metadata.coverImage,
+                        )}
+                        alt={ipfsLinks(gallery.cid, gallery.metadata.name)}
                         class="w-full h-72 object-cover transition duration-300 group-hover:opacity-90"
                     />
 
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white text-center py-2 text-md font-medium"
-                        title={gallery.name}
+                        title={ipfsLinks(gallery.cid, gallery.metadata.name)}
                     >
-                        {gallery.name}
+                        {ipfsLinks(gallery.cid, gallery.metadata.name)}
                     </div>
                 </a>
             {/each}

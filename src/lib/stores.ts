@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import type { Gallery, GalleryMetadata } from './types';
 
 export const theme = writable(localStorage.getItem("theme") || "light");
 
@@ -19,5 +20,12 @@ export const ipfsGateway = writable(localStorage.getItem("ipfsGateway") || "http
 ipfsGateway.subscribe((value) => localStorage.setItem("ipfsGateway", value));
 
 
-export const galleries = writable(localStorage.getItem("galleries") || []);
-galleries.subscribe((value) => localStorage.setItem("galleries", value));
+// Parse galleries from localStorage or use an empty array as the default
+const savedGalleries = localStorage.getItem("galleries");
+const parsedGalleries: Gallery[] = savedGalleries ? JSON.parse(savedGalleries) : [];
+
+// Strictly typed galleries store
+export const galleries = writable<Gallery[]>(parsedGalleries);
+
+// Update localStorage whenever galleries store changes
+galleries.subscribe((value) => localStorage.setItem("galleries", JSON.stringify(value)));
