@@ -10,7 +10,6 @@
         >
             Orbital Eclipse
         </a>
-        <!-- Sectionalized buttons -->
         <nav class="flex space-x-4">
             <a
                 href="#galleries"
