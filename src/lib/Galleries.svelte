@@ -33,7 +33,8 @@
                     <img
                         src={ipfsLinks(
                             gallery.cid,
-                            gallery.metadata.coverImage,
+                            gallery.metadata.coverImage ??
+                                gallery.metadata.images[0],
                         )}
                         alt={gallery.metadata.name}
                         class="w-full h-72 object-cover transition-opacity duration-300 group-hover:opacity-90"
