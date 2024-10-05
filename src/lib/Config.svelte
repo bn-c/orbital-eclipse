@@ -34,7 +34,7 @@
 
             const metadata = await response.json();
 
-            if (!metadata.name || !metadata.description || !metadata.images) {
+            if (!metadata.name || !metadata.images) {
                 throw new Error("Invalid metadata structure.");
             }
 

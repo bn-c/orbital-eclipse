@@ -2,6 +2,7 @@
   import Header from "./lib/Header.svelte";
   import Galleries from "./lib/Galleries.svelte";
   import Config from "./lib/Config.svelte";
+  import Tools from "./lib/Tools.svelte";
   import { currentPage } from "./lib/stores";
 </script>
 
@@ -22,6 +23,6 @@
     <Config />
   {/if}
   {#if $currentPage === "Tools"}
-    <!-- Tools component goes here -->
+    <Tools />
   {/if}
 </main>
