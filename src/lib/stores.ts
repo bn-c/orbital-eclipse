@@ -16,4 +16,8 @@ function setActivePage(page: Page) {
 
 
 export const ipfsGateway = writable(localStorage.getItem("ipfsGateway") || "https://ipfs.io");
-theme.subscribe((value) => localStorage.setItem("ipfsGateway", value));
+ipfsGateway.subscribe((value) => localStorage.setItem("ipfsGateway", value));
+
+
+export const galleries = writable(localStorage.getItem("galleries") || []);
+galleries.subscribe((value) => localStorage.setItem("galleries", value));

@@ -1,39 +1,5 @@
 <script lang="ts">
-    import { writable } from "svelte/store";
-
-    // Sample gallery data using dynamic placeholders from picsum.photos
-    const galleries = writable([
-        {
-            id: 1,
-            name: "Solar System Exploration asdfal;kwejklfjawslkfjklasdjflkajsdlk;fjsaodklfjl;kdsajfasdjlk;fdsajklfjsdalk;fjadslk;jfadls;kdj",
-            cover: "https://picsum.photos/200/300?random=1",
-        },
-        {
-            id: 2,
-            name: "Deep Space Discoveries",
-            cover: "https://picsum.photos/200/300?random=2",
-        },
-        {
-            id: 3,
-            name: "Astronomical Phenomena",
-            cover: "https://picsum.photos/200/300?random=3",
-        },
-        {
-            id: 4,
-            name: "Galactic Wonders",
-            cover: "https://picsum.photos/200/300?random=4",
-        },
-        {
-            id: 5,
-            name: "Cosmic Marvels",
-            cover: "https://picsum.photos/200/300?random=5",
-        },
-        {
-            id: 6,
-            name: "Nebula Views",
-            cover: "https://picsum.photos/600/300?random=6",
-        },
-    ]);
+    import { galleries, ipfsGateway } from "./stores";
 </script>
 
 <!-- Gallery Section -->
