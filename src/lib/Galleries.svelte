@@ -1,5 +1,30 @@
 <script lang="ts">
     import { galleries, ipfsGateway } from "./stores";
+    import { writable, derived } from "svelte/store";
+
+    const searchQuery = writable("");
+    const filteredGalleries = derived(
+        [galleries, searchQuery],
+        ([$galleries, $searchQuery]) => {
+            if (!$searchQuery.trim()) return $galleries;
+
+            return $galleries.filter((gallery) => {
+                const { name, author, description, tags } = gallery.metadata;
+                const searchLower = $searchQuery.toLowerCase();
+
+                return (
+                    (name && name.toLowerCase().includes(searchLower)) ||
+                    (author && author.toLowerCase().includes(searchLower)) ||
+                    (description &&
+                        description.toLowerCase().includes(searchLower)) ||
+                    (tags &&
+                        tags.some((tag) =>
+                            tag.toLowerCase().includes(searchLower),
+                        ))
+                );
+            });
+        },
+    );
 
     function ipfsLinks(cid: string, file: string): string {
         return `${$ipfsGateway}/ipfs/${cid}/${file}`;
@@ -21,11 +46,20 @@
         Available Galleries
     </h2>
 
-    {#if $galleries.length > 0}
+    <div class="mb-8 max-w-xl mx-auto">
+        <input
+            type="text"
+            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            placeholder="Search galleries by name, author, description, or tags..."
+            bind:value={$searchQuery}
+        />
+    </div>
+
+    {#if $filteredGalleries.length > 0}
         <div
             class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 justify-center"
         >
-            {#each $galleries as gallery}
+            {#each $filteredGalleries as gallery}
                 <a
                     href={`#viewer?view=${gallery.cid}`}
                     class="relative group rounded-lg overflow-hidden shadow-md transition-transform duration-300 dark:bg-gray-800 bg-gray-300 hover:-translate-y-2"
@@ -60,7 +94,7 @@
         </div>
     {:else}
         <p class="text-gray-600 dark:text-gray-300 text-center">
-            No galleries are currently registered. Please check back later.
+            No galleries match your search criteria.
         </p>
     {/if}
 </section>

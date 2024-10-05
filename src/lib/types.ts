@@ -9,7 +9,18 @@ export interface GalleryMetadata {
     tags?: string[];                 // Optional array of tags (e.g., ["space", "planets"])
     sources?: string[];              // Optional list of external URLs (e.g., ["https://example.com"])
     version: string;                 // Schema version (e.g., "1.0")
+
+    uploader?: {                     // Optional uploader information
+        name: string;                // Uploader's name
+        links?: {                    // Optional links related to the uploader
+            profile?: string;        // Link to the uploader's profile (e.g., social media, personal website)
+            portfolio?: string;      // Link to the uploader's portfolio
+        };
+        comment?: string;            // Optional comment from the uploader
+    };
+    license?: string;                // Optional license information (e.g., "CC BY-SA 4.0", "GPLv3")
 }
+
 
 // Define the structure of the gallery object stored in the store
 export interface Gallery {
