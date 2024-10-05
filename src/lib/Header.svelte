@@ -13,55 +13,55 @@
         <nav class="flex space-x-4">
             <a
                 href="#galleries"
-                on:click={() => ($currentPage = "Galleries")}
+                on:click={() => ($currentPage = "galleries")}
                 class="px-4 py-2 rounded-md transition duration-300"
-                class:bg-gray-300={$currentPage === "Galleries"}
-                class:bg-gray-200={$currentPage !== "Galleries"}
-                class:dark:bg-gray-600={$currentPage === "Galleries"}
-                class:dark:bg-gray-700={$currentPage !== "Galleries"}
-                class:text-gray-800={$currentPage !== "Galleries"}
-                class:text-gray-100={$currentPage === "Galleries"}
+                class:bg-gray-300={$currentPage === "galleries"}
+                class:bg-gray-200={$currentPage !== "galleries"}
+                class:dark:bg-gray-600={$currentPage === "galleries"}
+                class:dark:bg-gray-700={$currentPage !== "galleries"}
+                class:text-gray-800={$currentPage !== "galleries"}
+                class:text-gray-100={$currentPage === "galleries"}
             >
-                Galleries
+                galleries
             </a>
             <a
                 href="#viewer"
-                on:click={() => ($currentPage = "Viewer")}
+                on:click={() => ($currentPage = "viewer")}
                 class="px-4 py-2 rounded-md transition duration-300"
-                class:bg-gray-300={$currentPage === "Viewer"}
-                class:bg-gray-200={$currentPage !== "Viewer"}
-                class:dark:bg-gray-600={$currentPage === "Viewer"}
-                class:dark:bg-gray-700={$currentPage !== "Viewer"}
-                class:text-gray-800={$currentPage !== "Viewer"}
-                class:text-gray-100={$currentPage === "Viewer"}
+                class:bg-gray-300={$currentPage === "viewer"}
+                class:bg-gray-200={$currentPage !== "viewer"}
+                class:dark:bg-gray-600={$currentPage === "viewer"}
+                class:dark:bg-gray-700={$currentPage !== "viewer"}
+                class:text-gray-800={$currentPage !== "viewer"}
+                class:text-gray-100={$currentPage === "viewer"}
             >
-                Viewer
+                viewer
             </a>
             <a
                 href="#config"
-                on:click={() => ($currentPage = "Config")}
+                on:click={() => ($currentPage = "config")}
                 class="px-4 py-2 rounded-md transition duration-300"
-                class:bg-gray-300={$currentPage === "Config"}
-                class:bg-gray-200={$currentPage !== "Config"}
-                class:dark:bg-gray-600={$currentPage === "Config"}
-                class:dark:bg-gray-700={$currentPage !== "Config"}
-                class:text-gray-800={$currentPage !== "Config"}
-                class:text-gray-100={$currentPage === "Config"}
+                class:bg-gray-300={$currentPage === "config"}
+                class:bg-gray-200={$currentPage !== "config"}
+                class:dark:bg-gray-600={$currentPage === "config"}
+                class:dark:bg-gray-700={$currentPage !== "config"}
+                class:text-gray-800={$currentPage !== "config"}
+                class:text-gray-100={$currentPage === "config"}
             >
-                Config
+                config
             </a>
             <a
                 href="#tools"
-                on:click={() => ($currentPage = "Tools")}
+                on:click={() => ($currentPage = "tools")}
                 class="px-4 py-2 rounded-md transition duration-300"
-                class:bg-gray-300={$currentPage === "Tools"}
-                class:bg-gray-200={$currentPage !== "Tools"}
-                class:dark:bg-gray-600={$currentPage === "Tools"}
-                class:dark:bg-gray-700={$currentPage !== "Tools"}
-                class:text-gray-800={$currentPage !== "Tools"}
-                class:text-gray-100={$currentPage === "Tools"}
+                class:bg-gray-300={$currentPage === "tools"}
+                class:bg-gray-200={$currentPage !== "tools"}
+                class:dark:bg-gray-600={$currentPage === "tools"}
+                class:dark:bg-gray-700={$currentPage !== "tools"}
+                class:text-gray-800={$currentPage !== "tools"}
+                class:text-gray-100={$currentPage === "tools"}
             >
-                Tools
+                tools
             </a>
         </nav>
         <div class="flex items-center space-x-4">

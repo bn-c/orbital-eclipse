@@ -3,7 +3,25 @@
   import Galleries from "./lib/Galleries.svelte";
   import Config from "./lib/Config.svelte";
   import Tools from "./lib/Tools.svelte";
-  import { currentPage } from "./lib/stores";
+  import Viewer from "./lib/Viewer.svelte";
+  import { currentPage, type Page } from "./lib/stores";
+  import { onMount } from "svelte";
+
+  // Function to parse the URL fragment and update the currentPage store
+  function parseURLFragment() {
+    const hash = window.location.hash || "#galleries"; // Default to #galleries if no hash is set
+    const page = hash.split("?")[0].slice(1); // Extract the page name from hash, e.g., "#viewer?view=CID" -> "viewer"
+    currentPage.set(page as Page); // Capitalize the first letter and set it
+  }
+
+  // Set up the initial state and listen for hash changes
+  onMount(() => {
+    parseURLFragment();
+
+    window.addEventListener("hashchange", () => {
+      parseURLFragment();
+    });
+  });
 </script>
 
 <main
@@ -13,16 +31,16 @@
   <Header />
 
   <!-- Main Content Area -->
-  {#if $currentPage === "Galleries"}
+  {#if $currentPage === "galleries"}
     <Galleries />
   {/if}
-  {#if $currentPage === "Viewer"}
-    <!-- Viewer component goes here -->
+  {#if $currentPage === "viewer"}
+    <Viewer />
   {/if}
-  {#if $currentPage === "Config"}
+  {#if $currentPage === "config"}
     <Config />
   {/if}
-  {#if $currentPage === "Tools"}
+  {#if $currentPage === "tools"}
     <Tools />
   {/if}
 </main>

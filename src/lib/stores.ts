@@ -8,8 +8,8 @@ theme.subscribe((value) => {
     document.documentElement.classList.toggle("dark", value === "dark");
 });
 
-type Page = "Galleries" | "Viewer" | "Config" | "Tools";
-export const currentPage = writable<Page>("Galleries");
+export type Page = "galleries" | "viewer" | "config" | "tools";
+export const currentPage = writable<Page>("galleries");
 
 function setActivePage(page: Page) {
     currentPage.set(page);
