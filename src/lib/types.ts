@@ -3,7 +3,7 @@ export interface GalleryMetadata {
     name: string;                    // Gallery name
     description?: string;            // Optional gallery description
     author?: string;                 // Optional author of the gallery
-    creationDate: string;            // ISO 8601 formatted creation date
+    creationDate: string;            // ISO 8601 formatted creation date UTC
     coverImage?: string;             // Optional filename of the cover image (e.g., "cover.jpg")
     images: string[];                // List of image file names (e.g., ["image1.jpg", "image2.png"])
     tags?: string[];                 // Optional array of tags (e.g., ["space", "planets"])
