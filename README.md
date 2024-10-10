@@ -1,5 +1,9 @@
 # Orbital Eclipse
 
+![](./assets/light-mode.png)
+![](./assets/dark-mode.png)
+
+
 **Orbital Eclipse** is a gallery viewer designed to provide a seamless and interactive experience for viewing shared image collections hosted on the InterPlanetary File System (IPFS).
 
 Orbital Eclipse consists of two main components:
