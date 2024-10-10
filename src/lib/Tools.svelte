@@ -31,7 +31,12 @@
         const fileList = Array.from(files)
             .filter((file) => file.type.startsWith("image/"))
             .map((file) => file.name)
-            .sort((a, b) => a.localeCompare(b));
+            .sort((a, b) =>
+                a.localeCompare(b, undefined, {
+                    numeric: true,
+                    sensitivity: "base",
+                }),
+            );
 
         images.set(fileList);
 
