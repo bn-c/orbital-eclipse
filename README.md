@@ -92,6 +92,21 @@ This folder will contain all the necessary files and images for your gallery. Ex
 5. **Deploy the Folder to IPFS**:
    - Once your folder is set up correctly, you can deploy it to IPFS by adding the root folder. This will make the gallery accessible through a unique IPFS hash.
 
+6. **Check out the below examples:**
+You can import the galleries shown in the picture above using this json, or individually by their CID!
+
+```json
+[
+  "bafybeie26gyudkcsjclvog44jcuodifvb2wip4qdupj2kiukf2nax4w5fm",
+  "bafybeihbi3qzzz6o3z3griadhtxaeadgfxoxuio2d6ixihzqr64kbxie4u",
+  "bafybeifxl7r5julmobvkvqmskovhd6pucz6n6vgkjxgol7qfltrh4akd6i",
+  "bafybeicn4hwkqphmrosidsvtwvjpkwfztjja7ne3kq66xvc6tlvtsm3ihu",
+  "bafybeice6wxryh3xldtkihe7etv3vyhb34zcugqiqmixh2f4ny3yitpeiu",
+  "bafybeifnttvpvhlkb44xwzeg5yazeu4dndlyg62af2cjyn5mrik5msymni",
+  "bafybeihc43gbadykftphamebghfqafxbufwlmj4juvfqt5g2gubjsyz27a"
+]
+```
+
 ## Contributing
 
 Contributions are welcome! Feel free to open issues, submit pull requests, or suggest improvements to the schema or the front-end viewer.
